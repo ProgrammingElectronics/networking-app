@@ -4,9 +4,9 @@ from rest_framework import permissions, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import ProfileSerializer, UserSerializer, UserSerializerWithToken, IndustrySerializer, ExperienceSerializer
+from .serializers import ProfileSerializer, UserSerializer, UserSerializerWithToken, IndustrySerializer, SkillSerializer, ExperienceSerializer
 from rest_framework import viewsets
-from .models import Industry, Profile, Experience
+from .models import Industry, Profile, Skill, Experience
 
 ## The core of this functionality is the api_view decorator, which takes a list of HTTP methods that your view should respond to.
 @api_view(['GET'])
@@ -44,6 +44,11 @@ class ProfileViewSet(viewsets.ModelViewSet):
 class IndustryViewSet(viewsets.ModelViewSet):
     queryset = Industry.objects.all()
     serializer_class = IndustrySerializer
+
+
+class SkillViewSet(viewsets.ModelViewSet):
+    queryset = Skill.objects.all()
+    serializer_class = SkillSerializer
 
 
 class ExperienceViewSet(viewsets.ModelViewSet):

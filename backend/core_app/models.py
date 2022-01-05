@@ -3,8 +3,10 @@ from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE
 from django.db.models.fields import CharField
 
+
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=CASCADE, related_name='profile')
+    user = models.OneToOneField(
+        User, on_delete=CASCADE, related_name='profile')
     education = models.CharField(max_length=250)
     is_professional = models.BooleanField(blank=True)
     phone_number = models.CharField(max_length=10)
@@ -27,11 +29,23 @@ class Industry(models.Model):
     def __str__(self):
         return f'Industry ID: {self.id} Name: {self.name}'
 
-class Experience(models.Model):
-    profile = models.ForeignKey(Profile, on_delete=CASCADE, related_name="experience")
-    industry = models.ForeignKey(Industry, on_delete=CASCADE, related_name="experience")
-    years = models.IntegerField(blank=True)
-    #TODO - Add Skill as FK related
+
+class Skill(models.Model):
+    name = models.CharField(max_length=255, blank=True)
+    type = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
-        return f'Experience ID: {self.id} Profile ID: {self.profile} Industry ID: {self.industry}'
+        return f'Skill ID: {self.id} Name: {self.name}'
+
+
+class Experience(models.Model):
+    profile = models.ForeignKey(
+        Profile, on_delete=CASCADE, related_name="experience")
+    industry = models.ForeignKey(
+        Industry, on_delete=CASCADE, related_name="experience")
+    years = models.IntegerField(blank=True)
+    skill = models.ForeignKey(
+        Skill, on_delete=CASCADE, related_name="experience")
+
+    def __str__(self):
+        return f'Experience ID: {self.id} Profile ID: {self.profile} Industry ID: {self.industry} Skill ID: {self.skill}'
