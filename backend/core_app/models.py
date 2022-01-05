@@ -49,3 +49,11 @@ class Experience(models.Model):
 
     def __str__(self):
         return f'Experience ID: {self.id} Profile ID: {self.profile} Industry ID: {self.industry} Skill ID: {self.skill}'
+
+class Bootcamp(models.Model):
+    name = models.CharField(max_length=255, blank=True)
+    profile = models.ForeignKey(
+        Profile, on_delete=CASCADE, related_name="bootcamp")
+        
+    def __str__(self):
+        return f'Bootcamp ID: {self.id} Name: {self.name}'
