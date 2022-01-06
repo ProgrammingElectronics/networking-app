@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
 from django.contrib.auth.models import User
-from .models import Experience, Industry, Profile, Skill, Bootcamp
+from .models import Experience, Industry, Profile, Skill, Bootcamp, ConnectionRequest
 
 # Serializes current user
 
@@ -46,7 +46,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = [
-            'id', 'user', 'education', 'is_professional', 'phone_number', 'linkedin_url', 'github_url', 'img_url', 'about_me'
+            'id', 'user', 'education', 'is_professional', 'phone_number', 'linkedin_url', 'github_url', 'img_url', 'about_me', 'connections'
         ]
 
 
@@ -67,7 +67,14 @@ class ExperienceSerializer(serializers.ModelSerializer):
         model = Experience
         fields = ['id', 'profile', 'industry', 'years', 'skill']
 
+
 class BootcampSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bootcamp
         fields = ['id', 'profile', 'name']
+
+
+class ConnectionRequestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ConnectionRequest
+        fields = ['id', 'from_profile', 'to_profile']
