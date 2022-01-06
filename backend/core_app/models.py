@@ -51,7 +51,7 @@ class Experience(models.Model):
         Profile, on_delete=CASCADE, related_name="experience")
     industry = models.ForeignKey(
         Industry, on_delete=CASCADE, related_name="experience")
-    years = models.CharField(blank=True, max_length=255, choices=CONNECTION_STATUS)
+    years = models.CharField(blank=True, max_length=255, choices=YEAR_CHOICES)
     skill = models.ForeignKey(
         Skill, on_delete=CASCADE, related_name="experience")
 
