@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.base import Model
 from django.db.models.deletion import CASCADE
 
 CONNECTION_STATUS = (
@@ -14,6 +15,11 @@ YEAR_CHOICES = (
     ('3-0', '3-Up Years'),
 )
 
+GRADUATION_STATUS = (
+    ('enrolled', 'Enrolled'),
+    ('graduated', 'Graduated'),
+)
+
 class Profile(models.Model):
     user = models.OneToOneField(
         User, on_delete=CASCADE, related_name='profile')
@@ -24,7 +30,8 @@ class Profile(models.Model):
     github_url = models.CharField(max_length=250, blank=True)
     img_url = models.CharField(max_length=250, blank=True)
     about_me = models.TextField(max_length=1000, blank=True)
-    connections = models.ManyToManyField('self', blank=True, related_name='connections')
+    # Group may not need this due to the connection request model
+    # connections = models.ManyToManyField('self', blank=True, related_name='connections')
 
     def __str__(self):
         return f'Profile ID: {self.id} User: {self.user}'
@@ -48,9 +55,9 @@ class Skill(models.Model):
 
 class Experience(models.Model):
     profile = models.ForeignKey(
-        Profile, on_delete=CASCADE, related_name="experience")
+        Profile, on_delete=CASCADE, related_name="experience", blank=True)
     industry = models.ForeignKey(
-        Industry, on_delete=CASCADE, related_name="experience")
+        Industry, on_delete=CASCADE, related_name="experience", blank=True)
     years = models.CharField(blank=True, max_length=255, choices=YEAR_CHOICES)
     skill = models.ForeignKey(
         Skill, on_delete=CASCADE, related_name="experience")
@@ -61,11 +68,20 @@ class Experience(models.Model):
 
 class Bootcamp(models.Model):
     name = models.CharField(max_length=255, blank=True)
-    profile = models.ForeignKey(
-        Profile, on_delete=CASCADE, related_name="bootcamp")
         
     def __str__(self):
         return f'Bootcamp ID: {self.id} Name: {self.name}'
+
+class Enrollment(models.Model):
+    profile = models.ForeignKey(
+        Profile, on_delete=CASCADE, related_name="enrollment", blank=True)
+    bootcamp = models.ForeignKey(
+        Bootcamp, on_delete=CASCADE, related_name="enrollment", blank=True)
+    graduation_year = models.CharField(max_length=4, blank=True)
+    graduation_status = models.CharField(max_length=255, choices=GRADUATION_STATUS)
+
+    def __str__(self):
+        return f'Enrollment ID: {self.id} Bootcamp ID: {self.bootcamp} Profile ID: {self.profile} Status: {self.graduation_status}'
 
 
 # This should hold pending requests, the status determines whether it has been denied/approved/pending
@@ -76,7 +92,6 @@ class ConnectionRequest(models.Model):
     to_profile = models.ForeignKey(
         Profile, on_delete=CASCADE, related_name="to_user")
     status = models.CharField(max_length=255, choices=CONNECTION_STATUS, default='pending')
-
     
     def __str__(self):
         return f'Connection ID: {self.id} From User: {self.from_user} To User: {self.to_user} Status: {self.status}'

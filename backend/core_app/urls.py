@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ConnectionRequestViewSet, ProfileViewSet, current_user, BootcampViewSet, UserList, IndustryViewSet, ExperienceViewSet, SkillViewSet
+from .views import ConnectionRequestViewSet, EnrollmentViewSet, ProfileViewSet, current_user, BootcampViewSet, UserList, IndustryViewSet, ExperienceViewSet, SkillViewSet
 from rest_framework.routers import DefaultRouter
 
 # create router for views
@@ -10,6 +10,7 @@ router.register(r'experience', ExperienceViewSet, basename='experience')
 router.register(r'skills', SkillViewSet, basename='skills')
 router.register(r'bootcamps', BootcampViewSet, basename='bootcamps')
 router.register(r'connection-requests', ConnectionRequestViewSet, basename='requests')
+router.register(r'enrollments', EnrollmentViewSet , basename='enrollments')
 
 urlpatterns = [
     path('current_user/', current_user),

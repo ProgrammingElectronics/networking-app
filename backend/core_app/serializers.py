@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
 from django.contrib.auth.models import User
-from .models import Experience, Industry, Profile, Skill, Bootcamp, ConnectionRequest
+from .models import Enrollment, Experience, Industry, Profile, Skill, Bootcamp, ConnectionRequest
 
 # Serializes current user
 
@@ -39,7 +39,9 @@ class UserSerializerWithToken(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['token', 'username', 'password']
+        fields = [
+            'token', 'username', 'password'
+            ]
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -53,28 +55,45 @@ class ProfileSerializer(serializers.ModelSerializer):
 class IndustrySerializer(serializers.ModelSerializer):
     class Meta:
         model = Industry
-        fields = ['id', 'name', 'size']
+        fields = [
+            'id', 'name', 'size'
+            ]
 
 
 class SkillSerializer(serializers.ModelSerializer):
     class Meta:
         model = Skill
-        fields = ['id', 'name', 'type']
+        fields = [
+            'id', 'name', 'type'
+            ]
 
 
 class ExperienceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Experience
-        fields = ['id', 'profile', 'industry', 'years', 'skill']
+        fields = [
+            'id', 'profile', 'industry', 'years', 'skill'
+            ]
 
 
 class BootcampSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bootcamp
-        fields = ['id', 'profile', 'name']
+        fields = [
+            'id', 'name'
+            ]
 
 
 class ConnectionRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = ConnectionRequest
-        fields = ['id', 'from_profile', 'to_profile']
+        fields = [
+            'id', 'from_profile', 'to_profile'
+            ]
+
+class EnrollmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Enrollment
+        fields = [
+            'id', 'profile', 'bootcamp', 'graduation_year', 'graduation_status'
+            ]
