@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Profile, Industry, Skill, Experience, Bootcamp
+from .models import Enrollment, Profile, Industry, Skill, Experience, Bootcamp, ConnectionRequest
 # Register your models here.
 
-models = [Profile, Industry, Skill, Experience, Bootcamp]
+models = [Profile, Industry, Skill, Experience, Bootcamp, ConnectionRequest, Enrollment]
 admin.site.register(models)
