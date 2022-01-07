@@ -38,6 +38,7 @@ class Profile(models.Model):
 
 
 class Industry(models.Model):
+    profiles = models.ManyToManyField(Profile, blank=True, related_name="industries")
     name = models.CharField(max_length=255)
     size = models.CharField(max_length=255, blank=True)
 
@@ -46,24 +47,13 @@ class Industry(models.Model):
 
 
 class Skill(models.Model):
+    profiles = models.ManyToManyField(Profile, blank=True, related_name="skills")
     name = models.CharField(max_length=255, blank=True)
     type = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
         return f'Skill ID: {self.id} Name: {self.name}'
 
-
-class Experience(models.Model):
-    profile = models.ForeignKey(
-        Profile, on_delete=CASCADE, related_name="experience", blank=True)
-    industry = models.ForeignKey(
-        Industry, on_delete=CASCADE, related_name="experience", blank=True)
-    years = models.CharField(blank=True, max_length=255, choices=YEAR_CHOICES)
-    skill = models.ForeignKey(
-        Skill, on_delete=CASCADE, related_name="experience")
-
-    def __str__(self):
-        return f'Experience ID: {self.id} Profile ID: {self.profile} Industry ID: {self.industry} Skill ID: {self.skill}'
 
 
 class Bootcamp(models.Model):
