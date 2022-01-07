@@ -1,0 +1,42 @@
+[
+  {
+    "model": "core_app.Industry",
+    "pk": 1,
+    "fields":{
+      "name": "Pharma",
+      "size": "Big"
+    }
+  },
+  {
+    "model": "core_app.Industry",
+    "pk": 2,
+    "fields":{
+      "name": "Medical",
+      "size": "Big"
+    }
+  },
+  {
+    "model": "core_app.Industry",
+    "pk": 3,
+    "fields":{
+      "name": "Entertainment",
+      "size": "Big"
+    }
+  },
+  {
+    "model": "core_app.Industry",
+    "pk": 4,
+    "fields":{
+      "name": "Education",
+      "size": "Big"
+    }
+  },
+  {
+    "model": "core_app.Industry",
+    "pk": 5,
+    "fields":{
+      "name": "Finance",
+      "size": "Big"
+    }
+  }
+]
