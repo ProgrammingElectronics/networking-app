@@ -56,10 +56,17 @@ class BootcampViewSet(viewsets.ModelViewSet):
     queryset = Bootcamp.objects.all()
     serializer_class = BootcampSerializer
 
-
+# connectionRequestViewSet is now set to only access objects where the profile is the from_profile
 class ConnectionRequestViewSet(viewsets.ModelViewSet):
-    queryset = ConnectionRequest.objects.all()
+
+    def get_queryset(self):
+        user = self.request.user.id
+        profile = Profile.objects.get(user_id=user)
+        return ConnectionRequest.objects.filter(from_profile=profile)
+
+    # queryset = ConnectionRequest.objects.all()
     serializer_class = ConnectionRequestSerializer
+    ordering_fields = ['status']
 
 
 class EnrollmentViewSet(viewsets.ModelViewSet):

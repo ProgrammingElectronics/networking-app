@@ -67,8 +67,6 @@ class SkillSerializer(serializers.ModelSerializer):
             'id', 'name', 'type'
             ]
 
-
-
 class BootcampSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bootcamp
@@ -76,13 +74,13 @@ class BootcampSerializer(serializers.ModelSerializer):
             'id', 'name'
             ]
 
-
 class ConnectionRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = ConnectionRequest
         fields = [
-            'id', 'from_profile', 'to_profile'
+            'id', 'from_profile', 'to_profile', 'status'
             ]
+            
 
 class EnrollmentSerializer(serializers.ModelSerializer):
     class Meta:
