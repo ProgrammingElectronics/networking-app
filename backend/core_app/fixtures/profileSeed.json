@@ -1,0 +1,58 @@
+[
+{
+    "model": "core_app.profile",
+    "pk": 1,
+    "fields": {
+        "user": 2,
+        "education": "The Gym",
+        "is_professional": false,
+        "phone_number": "3124533366",
+        "linkedin_url": "https://www.linkedin.com/in/arnold-schwarzenegger/",
+        "github_url": "",
+        "img_url": "https://www.linkedin.com/in/arnold-schwarzenegger?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAADHU3GkBl-V4xKr09MRiC0zmUBq08yd_Wqs&lipi=urn%3Ali%3Apage%3Ad_flagship3_detail_base%3BF%2BUsDPYXSSyg3r%2F%2FUpr%2FBw%3D%3D",
+        "about_me": "Former Mr. Olympia, Conan, Terminator, and Governor of California."
+    }
+},
+{
+    "model": "core_app.profile",
+    "pk": 2,
+    "fields": {
+        "user": 3,
+        "education": "backwoods",
+        "is_professional": false,
+        "phone_number": "9098764545",
+        "linkedin_url": "",
+        "github_url": "",
+        "img_url": "https://cdn.theatlantic.com/thumbor/kJBXQPaFQhxvPx644amUKPq78ak=/0x432:3000x1994/960x500/media/img/mt/2016/10/AP_83613422320/original.jpg",
+        "about_me": "Yes - get over it....  I'm real!"
+    }
+},
+{
+    "model": "core_app.profile",
+    "pk": 3,
+    "fields": {
+        "user": 4,
+        "education": "Abbey Girls' School",
+        "is_professional": false,
+        "phone_number": "1233425645",
+        "linkedin_url": "",
+        "github_url": "",
+        "img_url": "https://tellyvisions.org/sites/default/files/styles/facebook/public/jane%20austen%20blue%20painting.jpg?itok=7PxK2GSk",
+        "about_me": "I am an English novelist known primarily for her six major novels, which interpret, critique and comment upon the British landed gentry at the end of the 18th century."
+    }
+},
+{
+    "model": "core_app.profile",
+    "pk": 4,
+    "fields": {
+        "user": 1,
+        "education": "codeplatoon",
+        "is_professional": false,
+        "phone_number": "6143540098",
+        "linkedin_url": "",
+        "github_url": "",
+        "img_url": "https://static.generated.photos/vue-static/face-generator/landing/wall/14.jpg",
+        "about_me": "I like to code."
+    }
+}
+]
