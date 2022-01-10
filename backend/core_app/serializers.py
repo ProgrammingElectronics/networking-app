@@ -11,7 +11,8 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'first_name',
-                  'last_name', 'email', 'profile']
+                  'last_name', 'email']
+        # NOTES removed profile
 
 # Serializes new user sign ups that responds with the new user's information including a new token.
 
@@ -42,15 +43,6 @@ class UserSerializerWithToken(serializers.ModelSerializer):
         fields = [
             'token', 'username', 'password'
             ]
-
-
-class ProfileSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Profile
-        fields = [
-            'id', 'user', 'education', 'is_professional', 'phone_number', 'linkedin_url', 'github_url', 'img_url', 'about_me', 'connections'
-        ]
-
 
 class IndustrySerializer(serializers.ModelSerializer):
     class Meta:
@@ -84,9 +76,29 @@ class ConnectionRequestSerializer(serializers.ModelSerializer):
             'id', 'from_profile', 'to_profile'
             ]
 
+
 class EnrollmentSerializer(serializers.ModelSerializer):
+    
+    bootcamp = BootcampSerializer()
+    
     class Meta:
         model = Enrollment
         fields = [
-            'id', 'profile', 'bootcamp', 'graduation_year', 'graduation_status'
+            'id', 'bootcamp', 'graduation_year', 'graduation_status'
             ]
+
+# Removed Profile from above
+
+class ProfileSerializer(serializers.ModelSerializer):
+    
+    user = UserSerializer()
+    industries = IndustrySerializer(many=True, read_only=True)
+    skills = SkillSerializer(many=True, read_only=True)
+    enrollment = EnrollmentSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Profile
+        fields = [
+            'id', 'user', 'education', 'is_professional', 'phone_number', 'linkedin_url', 'github_url', 'img_url', 'about_me', 'to_user', 'from_user', 'industries', 'skills', 'enrollment' 
+        ]
+        

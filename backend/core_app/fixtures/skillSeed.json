@@ -1,0 +1,42 @@
+[
+  {
+    "model": "core_app.Skill",
+    "pk": 1,
+    "fields":{
+      "name": "Python",
+      "type": "language"
+    }
+  },
+  {
+    "model": "core_app.Skill",
+    "pk": 2,
+    "fields":{
+      "name": "Javascript",
+      "type": "language"
+    }
+  },
+  {
+    "model": "core_app.Skill",
+    "pk": 3,
+    "fields":{
+      "name": "C++",
+      "type": "language"
+    }
+  },
+  {
+    "model": "core_app.Skill",
+    "pk": 4,
+    "fields":{
+      "name": "C",
+      "type": "language"
+    }
+  },
+  {
+    "model": "core_app.Skill",
+    "pk": 5,
+    "fields":{
+      "name": "Java",
+      "type": "language"
+    }
+  }
+]
