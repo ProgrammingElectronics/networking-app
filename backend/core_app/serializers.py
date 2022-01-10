@@ -10,8 +10,8 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'first_name',
-                  'last_name', 'email']
-        # NOTES removed profile
+                  'last_name', 'email', 'profile']
+        
 
 
 # To be used when this is the bottom of the nested serializer
