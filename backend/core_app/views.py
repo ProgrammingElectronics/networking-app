@@ -7,6 +7,7 @@ from rest_framework.views import APIView
 from .serializers import ConnectionRequestSerializer, EnrollmentSerializer, ProfileSerializer, UserSerializer, BootcampSerializer, UserSerializerWithToken, IndustrySerializer, SkillSerializer
 from rest_framework import viewsets
 from .models import Bootcamp, ConnectionRequest, Industry, Profile, Skill, Enrollment
+from django.db.models import Q
 
 ## The core of this functionality is the api_view decorator, which takes a list of HTTP methods that your view should respond to.
 @api_view(['GET'])
@@ -51,15 +52,22 @@ class SkillViewSet(viewsets.ModelViewSet):
     serializer_class = SkillSerializer
 
 
-
 class BootcampViewSet(viewsets.ModelViewSet):
     queryset = Bootcamp.objects.all()
     serializer_class = BootcampSerializer
 
-
+# connectionRequestViewSet is now set to only access objects where the profile is the from_profile
 class ConnectionRequestViewSet(viewsets.ModelViewSet):
-    queryset = ConnectionRequest.objects.all()
+
+    def get_queryset(self):
+        user = self.request.user.id
+        profile = Profile.objects.get(user_id=user)
+        return ConnectionRequest.objects.filter(
+            Q(from_profile=profile) | Q(to_profile=profile)
+        )
+
     serializer_class = ConnectionRequestSerializer
+    ordering_fields = ['status']
 
 
 class EnrollmentViewSet(viewsets.ModelViewSet):

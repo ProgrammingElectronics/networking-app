@@ -3,9 +3,8 @@ from rest_framework_jwt.settings import api_settings
 from django.contrib.auth.models import User
 from .models import Enrollment, Industry, Profile, Skill, Bootcamp, ConnectionRequest
 
+
 # Serializes current user
-
-
 class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -14,9 +13,16 @@ class UserSerializer(serializers.ModelSerializer):
                   'last_name', 'email']
         # NOTES removed profile
 
+
+# To be used when this is the bottom of the nested serializer
+class PublicUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username', 'first_name',
+                  'last_name', 'email']
+
+
 # Serializes new user sign ups that responds with the new user's information including a new token.
-
-
 class UserSerializerWithToken(serializers.ModelSerializer):
 
     token = serializers.SerializerMethodField()
@@ -41,24 +47,51 @@ class UserSerializerWithToken(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = [
-            'token', 'username', 'password'
+            'id', 'token', 'username', 'password'
             ]
+
+
+# This is the more generic profile serializer that only responds with some of the data. This is more publically consumable
+class PublicProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = [
+            'id', 'user', 'img_url', 
+        ]
+
 
 class IndustrySerializer(serializers.ModelSerializer):
     class Meta:
         model = Industry
         fields = [
-            'id', 'name', 'size'
+            'id', 'name', 'size', 'profiles'
             ]
+
+
+class EndNestedIndustrySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Industry
+        fields = [
+            'name', 'size'
+            ]
+    depth = 1
 
 
 class SkillSerializer(serializers.ModelSerializer):
     class Meta:
         model = Skill
         fields = [
-            'id', 'name', 'type'
+            'id', 'name', 'type', 'profiles'
             ]
 
+
+class EndNestedSkillSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Skill
+        fields = [
+            'name', 'type'
+            ]
+    depth = 1
 
 
 class BootcampSerializer(serializers.ModelSerializer):
@@ -73,7 +106,7 @@ class ConnectionRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = ConnectionRequest
         fields = [
-            'id', 'from_profile', 'to_profile'
+            'id', 'from_profile', 'to_profile', 'status'
             ]
 
 
@@ -84,21 +117,47 @@ class EnrollmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Enrollment
         fields = [
-            'id', 'bootcamp', 'graduation_year', 'graduation_status'
+            'id', 'profile', 'bootcamp', 'graduation_year', 'graduation_status'
             ]
+        
+# Cheich fields        
+#             'id', 'bootcamp', 'graduation_year', 'graduation_status'
+#             ]
 
-# Removed Profile from above
+
+class EndNestedEnrollmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Enrollment
+        fields = [
+            'bootcamp', 'graduation_year', 'graduation_status'
+            ]
+        depth = 1
+
 
 class ProfileSerializer(serializers.ModelSerializer):
-    
-    user = UserSerializer()
-    industries = IndustrySerializer(many=True, read_only=True)
-    skills = SkillSerializer(many=True, read_only=True)
-    enrollment = EnrollmentSerializer(many=True, read_only=True)
-
+    # This limits the information coming back from the user to not include the password 
+    user = PublicUserSerializer()
+    enrollment = EndNestedEnrollmentSerializer(many=True)
+    skills = EndNestedSkillSerializer(many=True)
+    industries = EndNestedIndustrySerializer(many=True)
     class Meta:
         model = Profile
         fields = [
-            'id', 'user', 'education', 'is_professional', 'phone_number', 'linkedin_url', 'github_url', 'img_url', 'about_me', 'to_user', 'from_user', 'industries', 'skills', 'enrollment' 
+            'id', 'user', 'education', 'is_professional', 'phone_number', 'linkedin_url', 'github_url', 'img_url', 'about_me', 'enrollment', 'skills', 'industries'
         ]
+
+# Removed Profile from above
+# Cheich Profile
+# class ProfileSerializer(serializers.ModelSerializer):
+    
+#     user = UserSerializer()
+#     industries = IndustrySerializer(many=True, read_only=True)
+#     skills = SkillSerializer(many=True, read_only=True)
+#     enrollment = EnrollmentSerializer(many=True, read_only=True)
+
+#     class Meta:
+#         model = Profile
+#         fields = [
+#             'id', 'user', 'education', 'is_professional', 'phone_number', 'linkedin_url', 'github_url', 'img_url', 'about_me', 'to_user', 'from_user', 'industries', 'skills', 'enrollment' 
+#         ]
         

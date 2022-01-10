@@ -20,6 +20,7 @@ GRADUATION_STATUS = (
     ('graduated', 'Graduated'),
 )
 
+
 class Profile(models.Model):
     user = models.OneToOneField(
         User, on_delete=CASCADE, related_name='profile')
@@ -55,12 +56,12 @@ class Skill(models.Model):
         return f'Skill ID: {self.id} Name: {self.name}'
 
 
-
 class Bootcamp(models.Model):
     name = models.CharField(max_length=255, blank=True)
         
     def __str__(self):
         return f'Bootcamp ID: {self.id} Name: {self.name}'
+
 
 class Enrollment(models.Model):
     profile = models.ForeignKey(
@@ -81,10 +82,10 @@ class Enrollment(models.Model):
 class ConnectionRequest(models.Model):
     # for POST this should grab the user id of current user
     from_profile = models.ForeignKey(
-        Profile, on_delete=CASCADE, related_name="from_user")
+        Profile, on_delete=CASCADE, related_name="from_profile")
     to_profile = models.ForeignKey(
-        Profile, on_delete=CASCADE, related_name="to_user")
+        Profile, on_delete=CASCADE, related_name="to_profile")
     status = models.CharField(max_length=255, choices=CONNECTION_STATUS, default='pending')
-    
+   
     def __str__(self):
-        return f'Connection ID: {self.id} From User: {self.from_user} To User: {self.to_user} Status: {self.status}'
+        return f'Connection ID: {self.id} From User: {self.from_profile} To User: {self.to_profile} Status: {self.status}'
