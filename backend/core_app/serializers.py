@@ -62,6 +62,14 @@ class IndustrySerializer(serializers.ModelSerializer):
             'id', 'name', 'size'
             ]
 
+class EndNestedIndustrySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Industry
+        fields = [
+            'name', 'size'
+            ]
+    depth = 1
+
 
 class SkillSerializer(serializers.ModelSerializer):
     class Meta:
@@ -70,6 +78,15 @@ class SkillSerializer(serializers.ModelSerializer):
             'id', 'name', 'type'
             ]
 
+class EndNestedSkillSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Skill
+        fields = [
+            'name', 'type'
+            ]
+    depth = 1
+
+
 class BootcampSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bootcamp
@@ -77,14 +94,12 @@ class BootcampSerializer(serializers.ModelSerializer):
             'id', 'name'
             ]
 
-
 class ConnectionRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = ConnectionRequest
         fields = [
             'id', 'from_profile', 'to_profile', 'status'
             ]
-
 
 class EnrollmentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -99,15 +114,16 @@ class EndNestedEnrollmentSerializer(serializers.ModelSerializer):
         fields = [
             'bootcamp', 'graduation_year', 'graduation_status'
             ]
-
+        depth = 1
 
 class ProfileSerializer(serializers.ModelSerializer):
     # This limits the information coming back from the user to not include the password 
     user = PublicUserSerializer()
     enrollment = EndNestedEnrollmentSerializer(many=True)
+    skills = EndNestedSkillSerializer(many=True)
+    industries = EndNestedIndustrySerializer(many=True)
     class Meta:
         model = Profile
         fields = [
-            'id', 'user', 'education', 'is_professional', 'phone_number', 'linkedin_url', 'github_url', 'img_url', 'about_me', 'enrollment'
+            'id', 'user', 'education', 'is_professional', 'phone_number', 'linkedin_url', 'github_url', 'img_url', 'about_me', 'enrollment', 'skills', 'industries'
         ]
-        depth = 3
