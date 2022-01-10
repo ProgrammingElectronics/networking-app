@@ -4,8 +4,6 @@ from django.contrib.auth.models import User
 from .models import Enrollment, Industry, Profile, Skill, Bootcamp, ConnectionRequest
 
 # Serializes current user
-
-
 class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -13,9 +11,14 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'first_name',
                   'last_name', 'email', 'profile']
 
+# To be used when this is the bottom of the nested serializer
+class PublicUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username', 'first_name',
+                  'last_name', 'email']
+
 # Serializes new user sign ups that responds with the new user's information including a new token.
-
-
 class UserSerializerWithToken(serializers.ModelSerializer):
 
     token = serializers.SerializerMethodField()
@@ -42,17 +45,6 @@ class UserSerializerWithToken(serializers.ModelSerializer):
         fields = [
             'id', 'token', 'username', 'password'
             ]
-
-# This should be used as an admin or when you have a connection. Contains contact information
-class ProfileSerializer(serializers.ModelSerializer):
-    # This limits the information coming back from the user to not include the password 
-    user = UserSerializer()
-    class Meta:
-        model = Profile
-        fields = [
-            'id', 'user', 'education', 'is_professional', 'phone_number', 'linkedin_url', 'github_url', 'img_url', 'about_me'
-        ]
-        depth = 1
 
 # This is the more generic profile serializer that only responds with some of the data. This is more publically consumable
 class PublicProfileSerializer(serializers.ModelSerializer):
@@ -85,6 +77,7 @@ class BootcampSerializer(serializers.ModelSerializer):
             'id', 'name'
             ]
 
+
 class ConnectionRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = ConnectionRequest
@@ -99,3 +92,22 @@ class EnrollmentSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'profile', 'bootcamp', 'graduation_year', 'graduation_status'
             ]
+
+class EndNestedEnrollmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Enrollment
+        fields = [
+            'bootcamp', 'graduation_year', 'graduation_status'
+            ]
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    # This limits the information coming back from the user to not include the password 
+    user = PublicUserSerializer()
+    enrollment = EndNestedEnrollmentSerializer(many=True)
+    class Meta:
+        model = Profile
+        fields = [
+            'id', 'user', 'education', 'is_professional', 'phone_number', 'linkedin_url', 'github_url', 'img_url', 'about_me', 'enrollment'
+        ]
+        depth = 3
