@@ -68,7 +68,10 @@ class Enrollment(models.Model):
     bootcamp = models.ForeignKey(
         Bootcamp, on_delete=CASCADE, related_name="enrollment", blank=True)
     graduation_year = models.CharField(max_length=4, blank=True)
-    graduation_status = models.CharField(max_length=255, choices=GRADUATION_STATUS)
+    graduation_status = models.CharField(max_length=255, choices=GRADUATION_STATUS, blank=True)
+
+    # added blank=True  to graduation status
+    # TODO graduation year should be a Date
 
     def __str__(self):
         return f'Enrollment ID: {self.id} Bootcamp ID: {self.bootcamp} Profile ID: {self.profile} Status: {self.graduation_status}'
