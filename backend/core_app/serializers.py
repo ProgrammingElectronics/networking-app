@@ -40,15 +40,26 @@ class UserSerializerWithToken(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = [
-            'token', 'username', 'password'
+            'id', 'token', 'username', 'password'
             ]
 
-
+# This should be used as an admin or when you have a connection. Contains contact information
 class ProfileSerializer(serializers.ModelSerializer):
+    # This limits the information coming back from the user to not include the password 
+    user = UserSerializer()
     class Meta:
         model = Profile
         fields = [
             'id', 'user', 'education', 'is_professional', 'phone_number', 'linkedin_url', 'github_url', 'img_url', 'about_me'
+        ]
+        depth = 1
+
+# This is the more generic profile serializer that only responds with some of the data. This is more publically consumable
+class PublicProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = [
+            'id', 'user', 'img_url', 
         ]
 
 
@@ -80,7 +91,7 @@ class ConnectionRequestSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'from_profile', 'to_profile', 'status'
             ]
-            
+
 
 class EnrollmentSerializer(serializers.ModelSerializer):
     class Meta:
