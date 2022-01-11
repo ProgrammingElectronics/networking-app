@@ -13,7 +13,6 @@ class UserSerializer(serializers.ModelSerializer):
                   'last_name', 'email', 'profile']
         
 
-
 # To be used when this is the bottom of the nested serializer
 class PublicUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -120,11 +119,6 @@ class EnrollmentSerializer(serializers.ModelSerializer):
             'id', 'profile', 'bootcamp', 'graduation_year', 'graduation_status'
             ]
         
-# Cheich fields        
-#             'id', 'bootcamp', 'graduation_year', 'graduation_status'
-#             ]
-
-
 class EndNestedEnrollmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Enrollment
@@ -137,27 +131,19 @@ class EndNestedEnrollmentSerializer(serializers.ModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     # This limits the information coming back from the user to not include the password 
     user = PublicUserSerializer()
-    enrollment = EndNestedEnrollmentSerializer(many=True)
-    skills = EndNestedSkillSerializer(many=True)
-    industries = EndNestedIndustrySerializer(many=True)
+
+    # TODO Not sure if we need these?
+    # enrollment = EndNestedEnrollmentSerializer(many=True)
+    # skills = EndNestedSkillSerializer(many=True)
+    # industries = EndNestedIndustrySerializer(many=True)
+    
+    enrollment = EnrollmentSerializer(many=True)
+    skills = SkillSerializer(many=True)
+    industries = IndustrySerializer(many=True)
+
+
     class Meta:
         model = Profile
         fields = [
             'id', 'user', 'education', 'is_professional', 'phone_number', 'linkedin_url', 'github_url', 'img_url', 'about_me', 'enrollment', 'skills', 'industries'
         ]
-
-# Removed Profile from above
-# Cheich Profile
-# class ProfileSerializer(serializers.ModelSerializer):
-    
-#     user = UserSerializer()
-#     industries = IndustrySerializer(many=True, read_only=True)
-#     skills = SkillSerializer(many=True, read_only=True)
-#     enrollment = EnrollmentSerializer(many=True, read_only=True)
-
-#     class Meta:
-#         model = Profile
-#         fields = [
-#             'id', 'user', 'education', 'is_professional', 'phone_number', 'linkedin_url', 'github_url', 'img_url', 'about_me', 'to_user', 'from_user', 'industries', 'skills', 'enrollment' 
-#         ]
-        
