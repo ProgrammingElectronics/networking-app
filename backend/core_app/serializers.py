@@ -139,11 +139,10 @@ class ProfileSerializer(serializers.ModelSerializer):
     
     enrollment = EnrollmentSerializer(many=True)
     skills = SkillSerializer(many=True)
-    industries = IndustrySerializer(many=True)
-
+    industries = IndustrySerializer(many=True) 
 
     class Meta:
         model = Profile
         fields = [
-            'id', 'user', 'education', 'is_professional', 'phone_number', 'linkedin_url', 'github_url', 'img_url', 'about_me', 'enrollment', 'skills', 'industries', "to_profile"
+            'id', 'user', 'education', 'is_professional', 'phone_number', 'linkedin_url', 'github_url', 'img_url', 'about_me', 'enrollment', 'skills', 'industries'
         ]
