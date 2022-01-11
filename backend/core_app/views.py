@@ -38,8 +38,38 @@ class UserList(APIView):
 
 # gets all of the profiles in the database
 class ProfileViewSet(viewsets.ModelViewSet):
-    queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
+
+    def get_queryset(self):
+        queryset = Profile.objects.all()
+        
+        # Extract comma separated search params, and convert into list
+        industry_params = self.request.query_params.get('industry')
+        skill_params = self.request.query_params.get('skill')
+        bootcamp_params = self.request.query_params.get('bootcamp')
+        
+        # if no params, return ALL profiles
+        if not industry_params and not skill_params and not bootcamp_params:
+            return queryset
+
+        # IMPORTANT NOTE: Each indiviudal filter will return ALL matches where ONE of the params is met.  i.e.  If industry params are [Education, Pharma], then any profiles that have either Education or Pharma or both will be returned.  
+        #  However -> between filters, we exclude if they don't have both an industry AND a skill. 
+       
+        # If industry, skill, or bootcamp params are passed...
+        # Then apply filters.  
+        if industry_params:
+            industry_filters = industry_params.split(',')
+            queryset = queryset.filter(industries__name__in=industry_filters).distinct()
+        
+        if skill_params:
+            skill_filters = skill_params.split(',')
+            queryset = queryset.filter(skills__name__in=skill_filters).distinct()
+
+        if bootcamp_params:
+            bootcamp_filters = bootcamp_params.split(',')
+            queryset = queryset.filter(enrollment__bootcamp__name__in=bootcamp_filters).distinct()
+            
+        return queryset
 
 
 class IndustryViewSet(viewsets.ModelViewSet):
