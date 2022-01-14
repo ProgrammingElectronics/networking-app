@@ -17,7 +17,7 @@ class UserSerializer(serializers.ModelSerializer):
 class PublicUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username', 'first_name',
+        fields = ['id','username', 'first_name',
                   'last_name', 'email']
 
 
@@ -101,11 +101,11 @@ class EndNestedEnrollmentSerializer(serializers.ModelSerializer):
 
 class ProfileSerializer(serializers.ModelSerializer):
     # This limits the information coming back from the user to not include the password 
-    user = PublicUserSerializer()
+    user = PublicUserSerializer(read_only=True)
     
-    enrollment = EnrollmentSerializer(many=True)
-    skills = SkillSerializer(many=True)
-    industries = IndustrySerializer(many=True)
+    enrollment = EnrollmentSerializer(many=True, read_only=True)
+    skills = SkillSerializer(many=True, read_only=True)
+    industries = IndustrySerializer(many=True, read_only=True)
 
 
     class Meta:
