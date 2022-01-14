@@ -11,13 +11,13 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'username', 'first_name',
                   'last_name', 'email', 'profile']
-        
+
 
 # To be used when this is the bottom of the nested serializer
 class PublicUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id','username', 'first_name',
+        fields = ['id', 'username', 'first_name',
                   'last_name', 'email']
 
 
@@ -26,7 +26,7 @@ class PublicProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = [
-            'id', 'user', 'img_url', 
+            'id', 'user', 'img_url',
         ]
 
 
@@ -35,7 +35,7 @@ class IndustrySerializer(serializers.ModelSerializer):
         model = Industry
         fields = [
             'id', 'name', 'size', 'profiles'
-            ]
+        ]
 
 
 class EndNestedIndustrySerializer(serializers.ModelSerializer):
@@ -43,7 +43,7 @@ class EndNestedIndustrySerializer(serializers.ModelSerializer):
         model = Industry
         fields = [
             'name', 'size'
-            ]
+        ]
     depth = 1
 
 
@@ -52,7 +52,7 @@ class SkillSerializer(serializers.ModelSerializer):
         model = Skill
         fields = [
             'id', 'name', 'type', 'profiles'
-            ]
+        ]
 
 
 class EndNestedSkillSerializer(serializers.ModelSerializer):
@@ -60,7 +60,7 @@ class EndNestedSkillSerializer(serializers.ModelSerializer):
         model = Skill
         fields = [
             'name', 'type'
-            ]
+        ]
     depth = 1
 
 
@@ -69,7 +69,7 @@ class BootcampSerializer(serializers.ModelSerializer):
         model = Bootcamp
         fields = [
             'id', 'name'
-            ]
+        ]
 
 
 class ConnectionRequestSerializer(serializers.ModelSerializer):
@@ -77,36 +77,37 @@ class ConnectionRequestSerializer(serializers.ModelSerializer):
         model = ConnectionRequest
         fields = [
             'id', 'from_profile', 'to_profile', 'status'
-            ]
+        ]
 
 
 class EnrollmentSerializer(serializers.ModelSerializer):
-    
+
     bootcamp = BootcampSerializer()
-    
+
     class Meta:
         model = Enrollment
         fields = [
             'id', 'profile', 'bootcamp', 'graduation_year', 'graduation_status'
-            ]
-        
+        ]
+
+
 class EndNestedEnrollmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Enrollment
         fields = [
             'bootcamp', 'graduation_year', 'graduation_status'
-            ]
+        ]
         depth = 1
 
 
 class ProfileSerializer(serializers.ModelSerializer):
+
     # This limits the information coming back from the user to not include the password 
-    user = PublicUserSerializer(read_only=True)
-    
+    user = PublicUserSerializer()
+   
     enrollment = EnrollmentSerializer(many=True, read_only=True)
     skills = SkillSerializer(many=True, read_only=True)
     industries = IndustrySerializer(many=True, read_only=True)
-
 
     class Meta:
         model = Profile
@@ -136,11 +137,12 @@ class UserSerializerWithToken(serializers.ModelSerializer):
             instance.set_password(password)
         instance.save()
         print(instance.id)
-        Profile.objects.create(user=instance, education='', is_professional=False, phone_number='', linkedin_url='', github_url='', img_url='', about_me='')
+        Profile.objects.create(user=instance, education='', is_professional=False,
+                               phone_number='', linkedin_url='', github_url='', img_url='', about_me='')
         return instance
 
     class Meta:
         model = User
         fields = [
             'id', 'token', 'username', 'password'
-            ]
+        ]
