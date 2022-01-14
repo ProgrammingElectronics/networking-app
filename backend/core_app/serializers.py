@@ -101,12 +101,13 @@ class EndNestedEnrollmentSerializer(serializers.ModelSerializer):
 
 
 class ProfileSerializer(serializers.ModelSerializer):
-    # This limits the information coming back from the user to not include the password
-    user = PublicUserSerializer()
 
-    enrollment = EnrollmentSerializer(many=True)
-    skills = SkillSerializer(many=True)
-    industries = IndustrySerializer(many=True)
+    # This limits the information coming back from the user to not include the password 
+    user = PublicUserSerializer()
+   
+    enrollment = EnrollmentSerializer(many=True, read_only=True)
+    skills = SkillSerializer(many=True, read_only=True)
+    industries = IndustrySerializer(many=True, read_only=True)
 
     class Meta:
         model = Profile
