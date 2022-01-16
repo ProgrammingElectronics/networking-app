@@ -82,7 +82,7 @@ class ConnectionRequestSerializer(serializers.ModelSerializer):
 
 class EnrollmentSerializer(serializers.ModelSerializer):
 
-    bootcamp = BootcampSerializer()
+    bootcamp = BootcampSerializer(read_only=True)
 
     class Meta:
         model = Enrollment
