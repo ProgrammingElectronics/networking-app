@@ -1,5 +1,7 @@
 from pathlib import Path
 import datetime
+import os
+import dotenv 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -8,8 +10,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
+dotenv_file = os.path.join(BASE_DIR, ".env")
+if os.path.isfile(dotenv_file):
+    dotenv.load_dotenv(dotenv_file)
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ewz177i=4y8%36$*bn5i1^stg%p4059*g9dwxlur81)&7504p7'
+# SECRET_KEY = 'django-insecure-ewz177i=4y8%36$*bn5i1^stg%p4059*g9dwxlur81)&7504p7'
+
+# UPDATE secret key
+SECRET_KEY = os.environ['SECRET_KEY'] # Instead of your actual secret key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -27,8 +36,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth'
     'corsheaders',
     'core_app',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.linkedin_oauth2'
 ]
 
 MIDDLEWARE = [
@@ -128,6 +145,11 @@ REST_FRAMEWORK = {
 }
 
 CORS_ORIGIN_WHITELIST = ['https://localhost:3000','http://localhost:3000']
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = (
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
 
 JWT_AUTH = {
     # how long the original token is valid for
