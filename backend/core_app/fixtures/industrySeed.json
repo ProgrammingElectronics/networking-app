@@ -35,8 +35,33 @@
     "model": "core_app.Industry",
     "pk": 5,
     "fields":{
-      "name": "Finance",
+      "name": "Marketing",
+      "size": "Big"
+    }
+  },
+  {
+    "model": "core_app.Industry",
+    "pk": 6,
+    "fields":{
+      "name": "Retail",
+      "size": "Big"
+    }
+  },
+  {
+    "model": "core_app.Industry",
+    "pk": 7,
+    "fields":{
+      "name": "Government",
+      "size": "Big"
+    }
+  },
+  {
+    "model": "core_app.Industry",
+    "pk": 8,
+    "fields":{
+      "name": "Environmental/Sustainability",
       "size": "Big"
     }
   }
+  
 ]

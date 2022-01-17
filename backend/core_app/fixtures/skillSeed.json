@@ -43,7 +43,7 @@
     "model": "core_app.Skill",
     "pk": 6,
     "fields":{
-      "name": "Python",
+      "name": "Ruby",
       "type": "language"
     }
   },
@@ -51,7 +51,7 @@
     "model": "core_app.Skill",
     "pk": 7,
     "fields":{
-      "name": "Javascript",
+      "name": "PHP",
       "type": "language"
     }
   },
@@ -59,160 +59,168 @@
     "model": "core_app.Skill",
     "pk": 8,
     "fields":{
-      "name": "C++",
-      "type": "language"
+      "name": "Angular",
+      "type": "web development"
     }
   },
   {
     "model": "core_app.Skill",
     "pk": 9,
     "fields":{
-      "name": "C",
-      "type": "language"
+      "name": "Django",
+      "type": "web development"
     }
   },
   {
     "model": "core_app.Skill",
     "pk": 10,
     "fields":{
-      "name": "Java",
-      "type": "language"
+      "name": "Express",
+      "type": "web development"
     }
   },
   {
     "model": "core_app.Skill",
     "pk": 11,
     "fields":{
-      "name": "Python",
-      "type": "language"
+      "name": "HTML/CSS",
+      "type": "web development"
     }
   },
   {
     "model": "core_app.Skill",
     "pk": 12,
     "fields":{
-      "name": "Javascript",
-      "type": "language"
+      "name": "jQuery",
+      "type": "web development"
     }
   },
   {
     "model": "core_app.Skill",
     "pk": 13,
     "fields":{
-      "name": "C++",
-      "type": "language"
+      "name": "Node.js",
+      "type": "web development"
     }
   },
   {
     "model": "core_app.Skill",
     "pk": 14,
     "fields":{
-      "name": "C",
-      "type": "language"
+      "name": "React",
+      "type": "web development"
     }
   },
   {
     "model": "core_app.Skill",
     "pk": 15,
     "fields":{
-      "name": "Java",
-      "type": "language"
+      "name": "Redux",
+      "type": "web development"
     }
   },
   {
     "model": "core_app.Skill",
     "pk": 16,
     "fields":{
-      "name": "Python",
-      "type": "language"
+      "name": "Android",
+      "type": "mobile app"
     }
   },
   {
     "model": "core_app.Skill",
     "pk": 17,
     "fields":{
-      "name": "Javascript",
-      "type": "language"
+      "name": "iOS",
+      "type": "mobile app"
     }
   },
   {
     "model": "core_app.Skill",
     "pk": 18,
     "fields":{
-      "name": "C++",
-      "type": "language"
+      "name": "Kotlin",
+      "type": "mobile app"
     }
   },
   {
     "model": "core_app.Skill",
     "pk": 19,
     "fields":{
-      "name": "C",
-      "type": "language"
+      "name": "Swift",
+      "type": "mobile app"
     }
   },
   {
     "model": "core_app.Skill",
     "pk": 20,
     "fields":{
-      "name": "Java",
-      "type": "language"
+      "name": "Xcode",
+      "type": "mobile app"
     }
   },
   {
     "model": "core_app.Skill",
     "pk": 21,
     "fields":{
-      "name": "Java",
-      "type": "language"
+      "name": "React Native",
+      "type": "mobile app"
     }
   },
   {
     "model": "core_app.Skill",
     "pk": 22,
     "fields":{
-      "name": "Python",
-      "type": "language"
+      "name": "AWS",
+      "type": "database/ops"
     }
   },
   {
     "model": "core_app.Skill",
     "pk": 23,
     "fields":{
-      "name": "Javascript",
-      "type": "language"
+      "name": "Heroku",
+      "type": "database/ops"
     }
   },
   {
     "model": "core_app.Skill",
     "pk": 24,
     "fields":{
-      "name": "C++",
-      "type": "language"
+      "name": "Linux",
+      "type": "database/ops"
     }
   },
   {
     "model": "core_app.Skill",
     "pk": 25,
     "fields":{
-      "name": "C",
-      "type": "language"
+      "name": "MongoDB",
+      "type": "database/ops"
     }
   },
   {
     "model": "core_app.Skill",
     "pk": 26,
     "fields":{
-      "name": "Java",
-      "type": "language"
+      "name": "MySQL",
+      "type": "database/ops"
     }
   },
   {
     "model": "core_app.Skill",
     "pk": 27,
     "fields":{
-      "name": "Python",
-      "type": "language"
+      "name": "Postgres",
+      "type": "database/ops"
+    }
+  },
+  {
+    "model": "core_app.Skill",
+    "pk": 28,
+    "fields":{
+      "name": "SQL",
+      "type": "database/ops"
     }
   }
 ]
