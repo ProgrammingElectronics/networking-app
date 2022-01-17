@@ -82,7 +82,8 @@ class ConnectionRequestSerializer(serializers.ModelSerializer):
 
 class EnrollmentSerializer(serializers.ModelSerializer):
 
-    bootcamp = BootcampSerializer()
+    # bootcamp = serializers.PrimaryKeyRelatedField(queryset=Bootcamp.objects.all())
+    # bootcamp = BootcampSerializer()
 
     class Meta:
         model = Enrollment
@@ -105,15 +106,16 @@ class ProfileSerializer(serializers.ModelSerializer):
     # This limits the information coming back from the user to not include the password 
     user = PublicUserSerializer()
    
-    enrollment = EnrollmentSerializer(many=True, read_only=True)
-    skills = SkillSerializer(many=True, read_only=True)
-    industries = IndustrySerializer(many=True, read_only=True)
+    enrollment = EndNestedEnrollmentSerializer(many=True)
+    skills = SkillSerializer(many=True)
+    industries = IndustrySerializer(many=True)
 
     class Meta:
         model = Profile
         fields = [
             'id', 'user', 'education', 'is_professional', 'phone_number', 'linkedin_url', 'github_url', 'img_url', 'about_me', 'enrollment', 'skills', 'industries'
         ]
+
 
 
 # Serializes new user sign ups that responds with the new user's information including a new token.

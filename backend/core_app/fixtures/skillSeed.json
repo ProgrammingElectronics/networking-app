@@ -38,5 +38,189 @@
       "name": "Java",
       "type": "language"
     }
+  },
+  {
+    "model": "core_app.Skill",
+    "pk": 6,
+    "fields":{
+      "name": "Ruby",
+      "type": "language"
+    }
+  },
+  {
+    "model": "core_app.Skill",
+    "pk": 7,
+    "fields":{
+      "name": "PHP",
+      "type": "language"
+    }
+  },
+  {
+    "model": "core_app.Skill",
+    "pk": 8,
+    "fields":{
+      "name": "Angular",
+      "type": "web development"
+    }
+  },
+  {
+    "model": "core_app.Skill",
+    "pk": 9,
+    "fields":{
+      "name": "Django",
+      "type": "web development"
+    }
+  },
+  {
+    "model": "core_app.Skill",
+    "pk": 10,
+    "fields":{
+      "name": "Express",
+      "type": "web development"
+    }
+  },
+  {
+    "model": "core_app.Skill",
+    "pk": 11,
+    "fields":{
+      "name": "HTML/CSS",
+      "type": "web development"
+    }
+  },
+  {
+    "model": "core_app.Skill",
+    "pk": 12,
+    "fields":{
+      "name": "jQuery",
+      "type": "web development"
+    }
+  },
+  {
+    "model": "core_app.Skill",
+    "pk": 13,
+    "fields":{
+      "name": "Node.js",
+      "type": "web development"
+    }
+  },
+  {
+    "model": "core_app.Skill",
+    "pk": 14,
+    "fields":{
+      "name": "React",
+      "type": "web development"
+    }
+  },
+  {
+    "model": "core_app.Skill",
+    "pk": 15,
+    "fields":{
+      "name": "Redux",
+      "type": "web development"
+    }
+  },
+  {
+    "model": "core_app.Skill",
+    "pk": 16,
+    "fields":{
+      "name": "Android",
+      "type": "mobile app"
+    }
+  },
+  {
+    "model": "core_app.Skill",
+    "pk": 17,
+    "fields":{
+      "name": "iOS",
+      "type": "mobile app"
+    }
+  },
+  {
+    "model": "core_app.Skill",
+    "pk": 18,
+    "fields":{
+      "name": "Kotlin",
+      "type": "mobile app"
+    }
+  },
+  {
+    "model": "core_app.Skill",
+    "pk": 19,
+    "fields":{
+      "name": "Swift",
+      "type": "mobile app"
+    }
+  },
+  {
+    "model": "core_app.Skill",
+    "pk": 20,
+    "fields":{
+      "name": "Xcode",
+      "type": "mobile app"
+    }
+  },
+  {
+    "model": "core_app.Skill",
+    "pk": 21,
+    "fields":{
+      "name": "React Native",
+      "type": "mobile app"
+    }
+  },
+  {
+    "model": "core_app.Skill",
+    "pk": 22,
+    "fields":{
+      "name": "AWS",
+      "type": "database/ops"
+    }
+  },
+  {
+    "model": "core_app.Skill",
+    "pk": 23,
+    "fields":{
+      "name": "Heroku",
+      "type": "database/ops"
+    }
+  },
+  {
+    "model": "core_app.Skill",
+    "pk": 24,
+    "fields":{
+      "name": "Linux",
+      "type": "database/ops"
+    }
+  },
+  {
+    "model": "core_app.Skill",
+    "pk": 25,
+    "fields":{
+      "name": "MongoDB",
+      "type": "database/ops"
+    }
+  },
+  {
+    "model": "core_app.Skill",
+    "pk": 26,
+    "fields":{
+      "name": "MySQL",
+      "type": "database/ops"
+    }
+  },
+  {
+    "model": "core_app.Skill",
+    "pk": 27,
+    "fields":{
+      "name": "Postgres",
+      "type": "database/ops"
+    }
+  },
+  {
+    "model": "core_app.Skill",
+    "pk": 28,
+    "fields":{
+      "name": "SQL",
+      "type": "database/ops"
+    }
   }
 ]
