@@ -29,6 +29,14 @@ class PublicProfileSerializer(serializers.ModelSerializer):
             'id', 'user', 'img_url',
         ]
 
+# Used when editing a profile
+class EditProfileSerializer(serializers.ModelSerializer):
+      class Meta:
+        model = Profile
+        fields = [
+            'id', 'user', 'education', 'is_professional', 'phone_number', 'linkedin_url', 'github_url', 'img_url', 'about_me', 'enrollment', 'skills', 'industries'
+        ]
+
 
 class IndustrySerializer(serializers.ModelSerializer):
     class Meta:
@@ -80,6 +88,15 @@ class ConnectionRequestSerializer(serializers.ModelSerializer):
         ]
 
 
+class AddEnrollmentSerializer(serializers.ModelSerializer):
+            
+    class Meta:
+        model = Enrollment
+        fields = [
+            'id', 'profile', 'bootcamp', 'graduation_year', 'graduation_status'
+        ]
+
+
 class EnrollmentSerializer(serializers.ModelSerializer):
 
     bootcamp = BootcampSerializer()
@@ -89,7 +106,6 @@ class EnrollmentSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'profile', 'bootcamp', 'graduation_year', 'graduation_status'
         ]
-
 
 class EndNestedEnrollmentSerializer(serializers.ModelSerializer):
     class Meta:

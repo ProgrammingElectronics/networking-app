@@ -24,9 +24,9 @@ GRADUATION_STATUS = (
 class Profile(models.Model):
     user = models.OneToOneField(
         User, on_delete=CASCADE, related_name='profile')
-    education = models.CharField(max_length=250)
+    education = models.CharField(max_length=250, blank=True)
     is_professional = models.BooleanField(blank=True)
-    phone_number = models.CharField(max_length=10)
+    phone_number = models.CharField(max_length=10, blank=True)
     linkedin_url = models.CharField(max_length=250, blank=True)
     github_url = models.CharField(max_length=250, blank=True)
     img_url = models.CharField(max_length=250, blank=True)

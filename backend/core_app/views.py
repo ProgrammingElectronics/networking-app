@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.serializers import Serializer
 from rest_framework.views import APIView
-from .serializers import ConnectionRequestSerializer, EnrollmentSerializer, ProfileSerializer, UserSerializer, BootcampSerializer, UserSerializerWithToken, IndustrySerializer, SkillSerializer
+from .serializers import ConnectionRequestSerializer, EnrollmentSerializer, ProfileSerializer, UserSerializer, BootcampSerializer, UserSerializerWithToken, IndustrySerializer, SkillSerializer, EditProfileSerializer, AddEnrollmentSerializer
 from rest_framework import viewsets
 from .models import Bootcamp, ConnectionRequest, Industry, Profile, Skill, Enrollment
 from django.db.models import Q
@@ -40,6 +40,12 @@ class UserList(APIView):
 class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     queryset = User.objects.all()
+
+
+class EditProfileViewSet(viewsets.ModelViewSet):
+    serializer_class = EditProfileSerializer
+    queryset = Profile.objects.all()
+
 
 # gets all of the profiles in the database
 class ProfileViewSet(viewsets.ModelViewSet):
@@ -109,3 +115,7 @@ class EnrollmentViewSet(viewsets.ModelViewSet):
     queryset = Enrollment.objects.all()
     serializer_class = EnrollmentSerializer
 
+
+class AddEnrollmentViewSet(viewsets.ModelViewSet):
+    queryset = Enrollment.objects.all()
+    serializer_class = AddEnrollmentSerializer
